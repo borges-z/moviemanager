@@ -1,22 +1,58 @@
 'use client';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useEffect, useState } from 'react';
 
 
 const schema = yup.object().shape({
     genre: yup.string().required('O gênero é obrigatório').min(3, 'O gênero deve ter pelo menos 3 caracteres'),
 });
 
-export default function GenreForm() {
+export function GenreList() {
 
+        // Fazer a requisição à API para buscar os gêneros
+        const fetchGenres = async () => {
+            try {
+                const response = await fetch('/api/generos'); // Faz a requisição para a API route
+                const data = await response.json(); // Transforma a resposta em JSON
+                console.log(data); // Atualiza o estado com os dados
+            } catch (error) {
+                console.error('Erro ao buscar gêneros:', error);
+            }
+        };
+
+        fetchGenres();
+}
+export function GenrePost(dados) {
+
+    // Fazer a requisição à API para buscar os gêneros
+    const fetchGenres = async (dados) => {
+        try {
+            const response = await fetch('/api/add-genero', {
+                method: 'POST', // O método HTTP que você deseja usar
+                headers: {
+                    'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
+                },
+                body: JSON.stringify(dados) // Converte o objeto JavaScript em uma string JSON
+            }); // Faz a requisição para a API route
+            console.log(dados); // Atualiza o estado com os dados
+        } catch (error) {
+            console.error('Erro ao buscar gêneros:', error);
+        }
+    };
+
+    fetchGenres(dados);
+}
+
+export default function GenreForm() {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema), 
     });
 
     const onSubmit = (data) => {
         console.log('Gênero cadastrado:', data);
-        // mesma coisa, joga para o banco de dados :)
+        GenrePost(data);
     };
 
     return (
