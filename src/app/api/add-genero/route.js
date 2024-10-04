@@ -16,6 +16,7 @@ export async function POST(request) {
         }
 
         // Insere o novo gênero no banco de dados
+        console.log(opa, genre)
         const novoGenero = await prisma.generos.create({
             data: {
                 name: genre, // usa a chave correta que corresponde ao modelo no banco

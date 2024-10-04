@@ -36,7 +36,7 @@ export function GenrePost(dados) {
                 },
                 body: JSON.stringify(dados) // Converte o objeto JavaScript em uma string JSON
             }); // Faz a requisição para a API route
-            console.log(dados); // Atualiza o estado com os dados
+            console.log(JSON.stringify(dados)); // Atualiza o estado com os dados
         } catch (error) {
             console.error('Erro ao buscar gêneros:', error);
         }
@@ -51,8 +51,8 @@ export default function GenreForm() {
     });
 
     const onSubmit = (data) => {
-        console.log('Gênero cadastrado:', data);
-        GenrePost(data);
+        console.log('Gênero cadastrado:', data.genre);
+        GenrePost(data.genre);
     };
 
     return (
