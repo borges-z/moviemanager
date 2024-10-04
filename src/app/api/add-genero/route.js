@@ -24,7 +24,7 @@ export async function POST(request) {
         });
 
         return new Response(JSON.stringify({ resultado: "OK", novoGenero }), {
-            status: 201, // Indica que a criação foi bem-sucedida
+            status: 201, // Indica que a criação foi bem-sucedida, segundo a convemcao
             headers: {
                 'Content-Type': 'application/json',
             },

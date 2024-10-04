@@ -14,6 +14,7 @@
     "axios": "^1.7.7",
     "next": "14.2.14",
     "nextjs": "^0.0.3",
+    "pg": "^8.13.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
